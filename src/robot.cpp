@@ -396,178 +396,27 @@ namespace robot
 		auto& eeA1 = dynamic_cast<aris::dynamic::GeneralMotion&>(model_a1.generalMotionPool().at(0));
 		auto& eeA2 = dynamic_cast<aris::dynamic::GeneralMotion&>(model_a2.generalMotionPool().at(0));
 
-		double arm1_ee_pm_1[16]{ 0 };
-		double arm1_ee_pm_2[16]{ 0 };
-		double arm1_ee_pm_3[16]{ 0 };
-		double arm1_current_ee_pm[16]{ 0 };
+		double filtered_force[6]{ 0 };
 
-
-		double arm2_ee_pm_1[16]{ 0 };
-		double arm2_ee_pm_2[16]{ 0 };
-		double arm2_ee_pm_3[16]{ 0 };
-		double arm2_current_ee_pm[16]{ 0 };
-
-		dualArm.setInputPos(angle1);
-		if (dualArm.forwardKinematics())
+		auto forceFilter = [&](double* actual_force_, double* filtered_force_)
 		{
-			mout() << "Error" << std::endl;
-		}
+			for (int i = 0; i < 6; i++)
+			{
+				imp_->force_buffer[i][imp_->buffer_index[i]] = actual_force_[i];
+				imp_->buffer_index[i] = (imp_->buffer_index[i] + 1) % 10;
 
-		eeA1.getMpm(arm1_ee_pm_1);
-		eeA2.getMpm(arm2_ee_pm_1);
+				filtered_force_[i] = std::accumulate(imp_->force_buffer[i].begin(), imp_->force_buffer[i].end(), 0.0) / 10;
+			}
+		};
 
-		dualArm.setInputPos(angle2);
-		if (dualArm.forwardKinematics())
-		{
-			mout() << "Error" << std::endl;
-		}
-
-		eeA1.getMpm(arm1_ee_pm_2);
-		eeA2.getMpm(arm2_ee_pm_2);
-
-		dualArm.setInputPos(angle3);
-		if (dualArm.forwardKinematics())
-		{
-			mout() << "Error" << std::endl;
-		}
-
-		eeA1.getMpm(arm1_ee_pm_3);
-		eeA2.getMpm(arm2_ee_pm_3);
-
-		dualArm.setInputPos(init_angle);
-		if (dualArm.forwardKinematics())
-		{
-			mout() << "Error" << std::endl;
-		}
-
-		eeA1.getMpm(arm1_current_ee_pm);
-		eeA2.getMpm(arm2_current_ee_pm);
-
-
-
-
-
-		//Arm 1
+		imp_->actual_force[0] += 2;
 		
-
-		double arm1_force_data_1[6]{ -0.204, - 0.0033, - 1.2455, - 0.0001,	0.0016, - 0.000};
-		double arm1_force_data_2[6]{ -1.7928, - 1.5529,	2.6597, - 0.0075,	0.0067, - 0.0007 };
-		double arm1_force_data_3[6]{ -0.5153,	0.9186,	1.5177,	0.0016,	0.0033,	0.0018 };
+		forceFilter(imp_->actual_force, filtered_force);
+		mout() << "ff " << filtered_force[0] <<'\t' << "af "<<imp_->actual_force[0]<< std::endl;
 
 
 
-
-		double arm1_t_vector[9]{ 0 };
-		double arm1_f_vector[9]{ 0 };
-
-		double arm1_f_matrix[54]{ 0 };	
-		double arm1_r_matrix[54]{ 0 };
-
-		double arm1_p_vector[6]{ 0 };
-		double arm1_l_vector[6]{ 0 };
-
-
-		double arm1_ee_rm_1[9]{ 0 };
-		double arm1_ee_rm_2[9]{ 0 };
-		double arm1_ee_rm_3[9]{ 0 };
-
-		double arm1_current_force[6]{ -0.003,	0.018, - 0.018, - 0.001,	0,	0.001 };
-		double arm1_comp_f[6]{ 0 };
-
-		aris::dynamic::s_pm2rm(arm1_ee_pm_1, arm1_ee_rm_1);
-		aris::dynamic::s_pm2rm(arm1_ee_pm_2, arm1_ee_rm_2);
-		aris::dynamic::s_pm2rm(arm1_ee_pm_3, arm1_ee_rm_3);
-
-
-
-		gc.getTorqueVector(arm1_force_data_1, arm1_force_data_2, arm1_force_data_3, arm1_t_vector);
-		gc.getForceVector(arm1_force_data_1, arm1_force_data_2, arm1_force_data_3, arm1_f_vector);
-
-		gc.getFMatrix(arm1_force_data_1, arm1_force_data_2, arm1_force_data_3, arm1_f_matrix);
-		gc.getRMatrix(arm1_ee_rm_1, arm1_ee_rm_2, arm1_ee_rm_3, arm1_r_matrix);
-
-		gc.getPLMatrix(arm1_f_matrix, arm1_t_vector, arm1_p_vector);
-		gc.getPLMatrix(arm1_r_matrix, arm1_f_vector, arm1_l_vector);
-
-		
-
-		gc.getCompFT(arm1_current_ee_pm, arm1_l_vector, arm1_p_vector, arm1_comp_f);
-
-
-		//getForceData(arm1_current_force, 0, imp_->init);
-		mout() << "Current Arm1 Force After Compensation:" << '\n' << arm1_current_force[0] + arm1_comp_f[0] << '\t' << arm1_current_force[1] + arm1_comp_f[1] << '\t'
-			<< arm1_current_force[2] + arm1_comp_f[2] << '\t' << arm1_current_force[3] + arm1_comp_f[3] << '\t'
-			<< arm1_current_force[4] + arm1_comp_f[4] << '\t' << arm1_current_force[5] + arm1_comp_f[5] << std::endl;
-
-
-		//Arm 2
-		
-
-		double arm2_force_data_1[6]{ 0.3995, - 0.0099, - 2.3944,	0.0002,	0.0057,	0.0002 };
-		double arm2_force_data_2[6]{ 3.5219, - 3.0621,	5.1777,	0.0329,	0.045, - 0.0019 };
-		double arm2_force_data_3[6]{ 0.9812,	1.753,	2.9958, - 0.0238,	0.0139, - 0.0002 };
-
-
-
-
-		double arm2_t_vector[9]{ 0 };
-		double arm2_f_vector[9]{ 0 };
-
-		double arm2_f_matrix[54]{ 0 };
-		double arm2_r_matrix[54]{ 0 };
-
-		double arm2_p_vector[6]{ 0 };
-		double arm2_l_vector[6]{ 0 };
-
-
-		double arm2_ee_rm_1[9]{ 0 };
-		double arm2_ee_rm_2[9]{ 0 };
-		double arm2_ee_rm_3[9]{ 0 };
-
-		double arm2_current_force[6]{ 0.009, - 0.01,	0.028, - 0.002,	0.002,	0};
-		double arm2_comp_f[6]{ 0 };
-
-		aris::dynamic::s_pm2rm(arm2_ee_pm_1, arm2_ee_rm_1);
-		aris::dynamic::s_pm2rm(arm2_ee_pm_2, arm2_ee_rm_2);
-		aris::dynamic::s_pm2rm(arm2_ee_pm_3, arm2_ee_rm_3);
-
-
-
-		gc.getTorqueVector(arm2_force_data_1, arm2_force_data_2, arm2_force_data_3, arm2_t_vector);
-		gc.getForceVector(arm2_force_data_1, arm2_force_data_2, arm2_force_data_3, arm2_f_vector);
-
-		gc.getFMatrix(arm2_force_data_1, arm2_force_data_2, arm2_force_data_3, arm2_f_matrix);
-		gc.getRMatrix(arm2_ee_rm_1, arm2_ee_rm_2, arm2_ee_rm_3, arm2_r_matrix);
-
-		gc.getPLMatrix(arm2_f_matrix, arm2_t_vector, arm2_p_vector);
-		gc.getPLMatrix(arm2_r_matrix, arm2_f_vector, arm2_l_vector);
-
-		
-
-		gc.getCompFT(arm2_current_ee_pm, arm2_l_vector, arm2_p_vector, arm2_comp_f);
-
-		//getForceData(arm2_current_force, 0, imp_->init);
-
-		gc.savePLVector(arm1_p_vector, arm2_p_vector, arm1_l_vector, arm2_l_vector);
-
-
-		
-
-		//mout() << "Current Arm1 End Pos:" << '\n' << arm1_current_ee_pm[0] << '\t' << arm1_current_ee_pm[1] << '\t'
-		//	<< arm1_current_ee_pm[2] << '\t' << arm1_current_ee_pm[3] << '\t'
-		//	<< arm1_current_ee_pm[4] << '\t' << arm1_current_ee_pm[5] << std::endl;
-
-		mout() << "Current Arm2 Force After Compensation:" << '\n' << arm2_current_force[0] + arm2_comp_f[0] << '\t' << arm2_current_force[1] + arm2_comp_f[1] << '\t'
-			<< arm2_current_force[2] + arm2_comp_f[2] << '\t' << arm2_current_force[3] + arm2_comp_f[3] << '\t'
-			<< arm2_current_force[4] + arm2_comp_f[4] << '\t' << arm2_current_force[5] + arm2_comp_f[5] << std::endl;
-
-		//mout() << "Current Arm2 End Pos:" << '\n' << arm2_current_ee_pm[0] << '\t' << arm2_current_ee_pm[1] << '\t'
-		//	<< arm2_current_ee_pm[2] << '\t' << arm2_current_ee_pm[3] << '\t'
-		//	<< arm2_current_ee_pm[4] << '\t' << arm2_current_ee_pm[5] << std::endl;
-
-
-
-		return 0;
+		return 100 - count();
 	}
 	ModelTest::ModelTest(const std::string& name)
 	{
@@ -1908,6 +1757,7 @@ namespace robot
 		double current_pos[6]{ 0 };
 		double current_force[6]{ 0 };
 		double actual_force[6]{ 0 };
+		double filtered_force[6]{ 0 };
 		double transform_force[6]{ 0 };
 
 		imp_->m_ = int32Param("model");
@@ -1954,11 +1804,7 @@ namespace robot
 				{
 					mout() << "Wrong Model" << std::endl;
 				}
-
 			}
-
-
-
 		};
 
 
@@ -2054,6 +1900,17 @@ namespace robot
 			}
 		};
 
+		auto forceFilter = [&](double* actual_force_, double* filtered_force_)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				imp_->force_buffer[i][imp_->buffer_index[i]] = actual_force_[i];
+				imp_->buffer_index[i] = (imp_->buffer_index[i] + 1) % 10;
+
+				filtered_force_[i] = std::accumulate(imp_->force_buffer[i].begin(), imp_->force_buffer[i].end(), 0.0) / 10;
+			}
+		};
+
 
 		for (std::size_t i = 0; i < 6; ++i)
 		{
@@ -2095,7 +1952,7 @@ namespace robot
 
 
 
-		if (!imp_->init)
+		if (!imp_->init && !imp_->contact_check)
 		{
 
 
@@ -2141,6 +1998,39 @@ namespace robot
 
 
 		}
+		else if (imp_->init && !imp_->contact_check)
+		{
+			double raw_force_checker[12]{ 0 };
+			double comp_force_checker[12]{ 0 };
+			double force_checker[12]{ 0 };
+
+			double a1_pm[16]{ 0 };
+			double a2_pm[16]{ 0 };
+
+			eeA1.getMpm(a1_pm);
+			eeA2.getMpm(a2_pm);
+
+
+			//Arm1
+			getForceData(raw_force_checker, 0, imp_->init);
+			gc.getCompFT(a1_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force_checker);
+			//Arm2
+			getForceData(raw_force_checker + 6, 1, imp_->init);
+			gc.getCompFT(a2_pm, imp_->arm2_l_vector, imp_->arm2_p_vector, comp_force_checker + 6);
+
+			
+			for (int i = 0; i < 12; i++)
+			{
+				force_checker[i] = comp_force_checker[i] + raw_force_checker[i];
+
+				if (abs(force_checker[i]) > 3) 
+				{
+					imp_->contact_check = true;
+					mout() << "Contact Check" << std::endl;
+					break;
+				}
+			}
+		}
 		else
 		{
 			if (imp_->m_ == 0)
@@ -2150,12 +2040,12 @@ namespace robot
 				eeA1.getV(current_vel);
 				eeA1.getMpm(current_pm);
 
-				//getForceData(current_force, 0, imp_->init);
-				//gc.getCompFT(current_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force);
-				//for (int i = 0; i < 6; i++)
-				//{
-				//	actual_force[i] = comp_force[i] + current_force[i];
-				//}
+				getForceData(current_force, 0, imp_->init);
+				gc.getCompFT(current_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force);
+				for (int i = 0; i < 6; i++)
+				{
+					actual_force[i] = comp_force[i] + current_force[i];
+				}
 
 				//Dead Zone of Force
 				for (int i = 0; i < 6; i++)
@@ -2175,14 +2065,16 @@ namespace robot
 
 				}
 
-				//Coordinate Transform Arm1
-				transform_force[0] = actual_force[2];
-				transform_force[1] = -actual_force[1];
-				transform_force[2] = actual_force[0];
+				forceFilter(actual_force, filtered_force);
 
-				transform_force[3] = actual_force[5];
-				transform_force[4] = -actual_force[4];
-				transform_force[5] = actual_force[3];
+				//Coordinate Transform Arm1
+				transform_force[0] = filtered_force[2];
+				transform_force[1] = -filtered_force[1];
+				transform_force[2] = filtered_force[0];
+
+				transform_force[3] = filtered_force[5];
+				transform_force[4] = -filtered_force[4];
+				transform_force[5] = filtered_force[3];
 
 
 				double acc[3]{ 0 };
@@ -2314,14 +2206,16 @@ namespace robot
 
 				}
 
-				//Coordinate Transform Arm2
-				transform_force[0] = -actual_force[2];
-				transform_force[1] = actual_force[1];
-				transform_force[2] = actual_force[0];
+				forceFilter(actual_force, filtered_force);
 
-				transform_force[3] = -actual_force[5];
-				transform_force[4] = actual_force[4];
-				transform_force[5] = actual_force[3];
+				//Coordinate Transform Arm2
+				transform_force[0] = -filtered_force[2];
+				transform_force[1] = filtered_force[1];
+				transform_force[2] = filtered_force[0];
+
+				transform_force[3] = -filtered_force[5];
+				transform_force[4] = filtered_force[4];
+				transform_force[5] = filtered_force[3];
 
 				double acc[3]{ 0 };
 				double ome[3]{ 0 };
@@ -2492,6 +2386,7 @@ namespace robot
 		double current_pos[6]{ 0 };
 		double current_force[6]{ 0 };
 		double actual_force[6]{ 0 };
+		double filtered_force[6]{ 0 };
 		double transform_force[6]{ 0 };
 
 		imp_->m_ = int32Param("model");
@@ -2637,6 +2532,18 @@ namespace robot
 		};
 
 
+		auto forceFilter = [&](double* actual_force_, double* filtered_force_)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				imp_->force_buffer[i][imp_->buffer_index[i]] = actual_force_[i];
+				imp_->buffer_index[i] = (imp_->buffer_index[i] + 1) % 10;
+
+				filtered_force_[i] = std::accumulate(imp_->force_buffer[i].begin(), imp_->force_buffer[i].end(), 0.0) / 10;
+			}
+		};
+
+
 		//for (std::size_t i = 0; i < 6; ++i)
 		//{
 		//	imp_->actual_force[i] = 0;
@@ -2677,7 +2584,7 @@ namespace robot
 
 
 
-		if (!imp_->init)
+		if (!imp_->init && !imp_->contact_check)
 		{
 
 
@@ -2723,6 +2630,39 @@ namespace robot
 
 
 		}
+		else if (imp_->init && !imp_->contact_check)
+		{
+			double raw_force_checker[12]{ 0 };
+			double comp_force_checker[12]{ 0 };
+			double force_checker[12]{ 0 };
+
+			double a1_pm[16]{ 0 };
+			double a2_pm[16]{ 0 };
+
+			eeA1.getMpm(a1_pm);
+			eeA2.getMpm(a2_pm);
+
+
+			//Arm1
+			getForceData(raw_force_checker, 0, imp_->init);
+			gc.getCompFT(a1_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force_checker);
+			//Arm2
+			getForceData(raw_force_checker + 6, 1, imp_->init);
+			gc.getCompFT(a2_pm, imp_->arm2_l_vector, imp_->arm2_p_vector, comp_force_checker + 6);
+
+
+			for (int i = 0; i < 12; i++)
+			{
+				force_checker[i] = comp_force_checker[i] + raw_force_checker[i];
+
+				if (abs(force_checker[i]) > 3)
+				{
+					imp_->contact_check = true;
+					mout() << "Contact Check" << std::endl;
+					break;
+				}
+			}
+		}
 		else
 		{
 			if (imp_->m_ == 0)
@@ -2747,14 +2687,16 @@ namespace robot
 				double dth[3]{ 0 };
 				double dt = 0.001;
 
-				//Coordinate Transform Arm1
-				transform_force[0] = actual_force[2];
-				transform_force[1] = -actual_force[1];
-				transform_force[2] = actual_force[0];
+				forceFilter(actual_force, filtered_force);
 
-				transform_force[3] = actual_force[5];
-				transform_force[4] = -actual_force[4];
-				transform_force[5] = actual_force[3];
+				//Coordinate Transform Arm1
+				transform_force[0] = filtered_force[2];
+				transform_force[1] = -filtered_force[1];
+				transform_force[2] = filtered_force[0];
+
+				transform_force[3] = filtered_force[5];
+				transform_force[4] = -filtered_force[4];
+				transform_force[5] = filtered_force[3];
 
 				//position
 				for (int i = 0; i < 3; i++)
@@ -2849,14 +2791,16 @@ namespace robot
 				double dth[3]{ 0 };
 				double dt = 0.001;
 
-				//Coordinate Transform Arm2
-				transform_force[0] = -actual_force[2];
-				transform_force[1] = actual_force[1];
-				transform_force[2] = actual_force[0];
+				forceFilter(actual_force, filtered_force);
 
-				transform_force[3] = -actual_force[5];
-				transform_force[4] = actual_force[4];
-				transform_force[5] = actual_force[3];
+				//Coordinate Transform Arm2
+				transform_force[0] = -filtered_force[2];
+				transform_force[1] = filtered_force[1];
+				transform_force[2] = filtered_force[0];
+
+				transform_force[3] = -filtered_force[5];
+				transform_force[4] = filtered_force[4];
+				transform_force[5] = filtered_force[3];
 
 				//position
 				for (int i = 0; i < 3; i++)

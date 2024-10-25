@@ -68,7 +68,64 @@ namespace robot
 		virtual ~ModelTest();
 		explicit ModelTest(const std::string& name = "ModelTest");
 	private:
-		double cef_;
+		struct Imp;
+		aris::core::ImpPtr<Imp> imp_;
+
+		struct ModelTest::Imp {
+
+			//Flag
+			bool init = false;
+			bool contact_check = false;
+
+			//Force Compensation Parameter
+			double comp_f[6]{ 0 };
+
+			//Arm1
+			double arm1_init_force[6]{ 0 };
+			double arm1_p_vector[6]{ 0 };
+			double arm1_l_vector[6]{ 0 };
+
+			//Arm2
+			double arm2_init_force[6]{ 0 };
+			double arm2_p_vector[6]{ 0 };
+			double arm2_l_vector[6]{ 0 };
+
+			//Desired Pos, Vel, Acc, Foc
+			double arm1_x_d[6]{ 0 };
+			double arm2_x_d[6]{ 0 };
+
+			double v_d[6]{ 0 };
+			double a_d[6]{ 0 };
+			double f_d[6]{ 0 };
+
+			//Current Vel
+			double v_c[6]{ 0 };
+
+			//Impedence Parameter
+			double a1_K[6]{ 100,100,100,5,5,5 };
+			double a1_B[6]{ 100,100,100,5,5,5 };
+			double a1_M[6]{ 1,1,1,2,2,2 };
+
+			double a2_K[6]{ 100,100,100,15,15,15 };
+			double a2_B[6]{ 100,100,100,15,15,15 };
+			double a2_M[6]{ 1,1,1,10,10,10 };
+
+			double Ke[6]{ 220000,220000,220000,220000,220000,220000 };
+
+			//Counter
+			int contact_count = 0;
+
+			//Force Buffer
+			std::array<double, 10> force_buffer[6] = {};
+			int buffer_index[6]{ 0 };
+
+			//Test
+			double actual_force[6]{ 0 };
+
+			//Switch Model
+			int m_;
+		};
+
 	};
 
 
@@ -271,6 +328,10 @@ namespace robot
 			//Counter
 			int contact_count = 0;
 
+			//Force Buffer
+			std::array<double, 10> force_buffer[6] = {};
+			int buffer_index[6]{ 0 };
+
 			//Test
 			double actual_force[6]{ 0 };
 
@@ -338,6 +399,10 @@ namespace robot
 
 			//Switch Model
 			int m_;
+
+			//Force Buffer
+			std::array<double, 10> force_buffer[6] = {};
+			int buffer_index[6]{ 0 };
 		};
 
 	};
