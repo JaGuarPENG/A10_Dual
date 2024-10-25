@@ -1,0 +1,866 @@
+<ControlServer>
+	<MultiModel __prop_name__="model" name="object" tools="{UrModel.L6.tool0,UrModel.L6.tool1,UrModel.L6.tool2,UrModel.L6.tool3,UrModel.L6.tool4,UrModel.L6.tool5,UrModel.L6.tool6,UrModel.L6.tool7,UrModel.L6.tool8,UrModel.L6.tool9,UrModel.L6.tool10,UrModel.L6.tool11,UrModel.L6.tool12,UrModel.L6.tool13,UrModel.L6.tool14,UrModel.L6.tool15,UrModel.L6.tool16}" wobjs="{UrModel.ground.wobj0,UrModel.ground.wobj1,UrModel.ground.wobj2,UrModel.ground.wobj3,UrModel.ground.wobj4,UrModel.ground.wobj5,UrModel.ground.wobj6,UrModel.ground.wobj7,UrModel.ground.wobj8,UrModel.ground.wobj9,UrModel.ground.wobj10,UrModel.ground.wobj11,UrModel.ground.wobj12,UrModel.ground.wobj13,UrModel.ground.wobj14,UrModel.ground.wobj15,UrModel.ground.wobj16,UrModel.ground.wobj17,UrModel.ground.wobj18,UrModel.ground.wobj19,UrModel.ground.wobj20,UrModel.ground.wobj21,UrModel.ground.wobj22,UrModel.ground.wobj23,UrModel.ground.wobj24,UrModel.ground.wobj25,UrModel.ground.wobj26,UrModel.ground.wobj27,UrModel.ground.wobj28,UrModel.ground.wobj29,UrModel.ground.wobj30,UrModel.ground.wobj31,UrModel.ground.wobj32}">
+		<ModelBasePool __prop_name__="submodel_pool">
+			<Model name="UrModel" time="0">
+				<Environment __prop_name__="environment" gravity="{0,0,-9.8,0,0,0}"/>
+				<VariablePoolElement __prop_name__="variable_pool">
+					<MatrixVariable name="tool0_axis_home">{0,0,0,0,0,0}</MatrixVariable>
+					<MatrixVariable name="dh">{0.1388,0.595726,0.574191,0.105278,0.124673,0.10077}</MatrixVariable>
+				</VariablePoolElement>
+				<PartPoolElement __prop_name__="part_pool">
+					<Part name="ground" active="true" pe="{0,0,0,-0,0,-0}" vel="{0,0,0,0,0,0}" acc="{0,0,0,0,0,0}" inertia="{1,0,0,0,1,1,1,0,0,0}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_0_j" active="true" pe="{0,0,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="wobj0" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj1" active="true" pe="{-0.217592,-1.10198,0.0106634,2.94639444847191,0.0213804489823286,3.35480297764196}"/>
+							<Marker name="wobj2" active="true" pe="{0,0,0,0.261799387799149,0,0.261799387799149}"/>
+							<Marker name="wobj3" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj4" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj5" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj6" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj7" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj8" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj9" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj10" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj11" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj12" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj13" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj14" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj15" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj16" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj17" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj18" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj19" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj20" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj21" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj22" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj23" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj24" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj25" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj26" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj27" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj28" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj29" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj30" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj31" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj32" active="true" pe="{0,0,0,-0,0,-0}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L1" active="true" pe="{0,0,0,-0,0,-0}" vel="{0,0,0,0,0,0}" acc="{0,0,0,0,0,0}" inertia="{0,0,0,0,0,0,-42.1862767072213,0,0,0}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_0_i" active="true" pe="{0,0,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="joint_1_j" active="true" pe="{0,0,0.1388,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L2" active="true" pe="{4.81559236931161e-18,3.85247389544929e-18,-1.04083408558608e-17,3.14159265358979,4.44305997370834e-17,3.14159265358979}" vel="{0,0,0,0,-4.94065645841247e-324,-4.94065645841247e-324}" acc="{0,0,0,0,0,0}" inertia="{0,-0.0714017943794443,0,-3103.70544566749,-12729.7467589128,-3076.65276972211,-10016.0286774118,1.31742874954125,0.495815835809995,8186.46649522112}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_1_i" active="true" pe="{0,0,0.1388,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_2_j" active="true" pe="{0,0,0.734526,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L3" active="true" pe="{-7.41847763774395e-17,-2.83707345810624e-18,-1.52655665885959e-16,3.14159265358979,7.52070652130808e-17,3.14159265358979}" vel="{-4.94065645841247e-324,0,0,0,-9.88131291682493e-324,-9.88131291682493e-324}" acc="{0,0,0,0,0,0}" inertia="{0,0.10907882035759,22411.1059735737,-2997.30341688398,-6124.65596037197,-6126.03205345864,0,0.271988180274282,0.149252183652513,-21439.7680950679}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_2_i" active="true" pe="{0,0,0.734526,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_3_j" active="true" pe="{0,0,1.308717,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L4" active="true" pe="{7.51472912844225e-18,-1.29076061898017e-16,-3.03793448730438e-16,3.14159265358979,7.85079089760591e-17,3.14159265358979}" vel="{-4.94065645841247e-324,0,0,-4.94065645841247e-324,-9.88131291682493e-324,-9.88131291682493e-324}" acc="{0,0,0,0,0,0}" inertia="{-4897.51633479128,-0.00240329574419941,-9931.00000574671,-6906.55780983793,0,-9904.4710292959,9904.57469407879,-0.0178194235883047,-0.0322856995371232,13058.8452181814}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_3_i" active="true" pe="{0,0,1.308717,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_4_j" active="true" pe="{0,0.124673,0.1388,0.785398163397448,0,0.785398163397448}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L5" active="true" pe="{2.79949153627875e-17,-9.90467091174955e-17,-2.56424931100255e-16,3.14159265358979,2.32478873337727e-16,3.14159265358979}" vel="{-4.94065645841247e-324,-4.94065645841247e-324,9.88131291682493e-324,-4.94065645841247e-324,-9.88131291682493e-324,-1.97626258336499e-323}" acc="{0,0,0,0,0,0}" inertia="{10836.0027292855,-0.00446428329695623,1345.58953520884,14753.5104736253,20445.3100126119,20280.2133403087,165.101786479696,-0.014486683888356,-0.0118299571197297,-1831.78515150222}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_4_i" active="true" pe="{0,0.124673,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="joint_5_j" active="true" pe="{0,0.124673,1.413995,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L6" active="true" pe="{-1.40653371653691e-13,0.225442999999738,1.41399500000004,3.14159265358975,1.57079632679493,1.57079632679486}" vel="{-4.94065645841247e-324,0,1.48219693752374e-323,-4.94065645841247e-324,-9.88131291682493e-324,-1.97626258336499e-323}" acc="{0,0,0,0,0,0}" inertia="{-712.186007845044,0.00214404035606785,-0.00259968759010102,77.1887186822657,-6.36263775487326,-6.36841542875185,-0.0119439728399347,0.00646844990340603,0.00664095242713145,-0.00842244438605353}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_5_i" active="true" pe="{2.22044604925031e-16,0,-0.10077,4.71238898038469,0,4.71238898038469}"/>
+							<Marker name="tool0" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool1" active="true" pe="{-0.0121912799030779,-0.0124049023528454,0.207421842555362,-0,0,-0}"/>
+							<Marker name="tool2" active="true" pe="{-0.0122018914288337,-0.0121644180147909,0.207655659084837,-0,0,-0}"/>
+							<Marker name="tool3" active="true" pe="{-0.0113275415896075,-0.0122478776136894,0.207251220629665,-0,0,-0}"/>
+							<Marker name="tool4" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool5" active="true" pe="{-0.000473577346144029,0.00224039233382676,0.209958969706206,-0,0,-0}"/>
+							<Marker name="tool6" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool7" active="true" pe="{-0.000272065790045658,-0.000341714113509188,0.049558630508868,-0,0,-0}"/>
+							<Marker name="tool8" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool9" active="true" pe="{0.00267001806520085,-0.00111891112321135,0.104652952882138,-0,0,-0}"/>
+							<Marker name="tool10" active="true" pe="{0.000638224950404781,-0.00214669395568704,0.104970834961942,-0,0,-0}"/>
+							<Marker name="tool11" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool12" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool13" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool14" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool15" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool16" active="true" pe="{0,0,0,-0,0,-0}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+				</PartPoolElement>
+				<MotionPoolElement __prop_name__="motion_pool">
+					<Motion name="motion_0" active="true" prt_m="L1" prt_n="ground" mak_i="joint_0_i" mak_j="joint_0_j" cf="{9.048343800706e-07}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{21.0253421556551,43.9286787028362,0}"/>
+					<Motion name="motion_1" active="true" prt_m="L2" prt_n="L1" mak_i="joint_1_i" mak_j="joint_1_j" cf="{-4.49799449599413}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{23.1652167722768,32.9032484875696,372.471530430339}"/>
+					<Motion name="motion_2" active="true" prt_m="L3" prt_n="L2" mak_i="joint_2_i" mak_j="joint_2_j" cf="{-35.1853341988594}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{25.4041837445908,30.1082042279193,4.50063702255052}"/>
+					<Motion name="motion_3" active="true" prt_m="L4" prt_n="L3" mak_i="joint_3_i" mak_j="joint_3_j" cf="{-0.631057658873034}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{3.34339499550317,6.88468144289497,0.359216694192607}"/>
+					<Motion name="motion_4" active="true" prt_m="L5" prt_n="L4" mak_i="joint_4_i" mak_j="joint_4_j" cf="{0.106762419418648}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{2.54150042536336,5.51324979602637,0.505208157909716}"/>
+					<Motion name="motion_5" active="true" prt_m="L6" prt_n="L5" mak_i="joint_5_i" mak_j="joint_5_j" cf="{0.0310592200647506}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{2.92285720106607,3.71712644416465,0.19676079543659}"/>
+				</MotionPoolElement>
+				<JointPoolElement __prop_name__="joint_pool">
+					<RevoluteJoint name="joint_0" active="true" prt_m="L1" prt_n="ground" mak_i="joint_0_i" mak_j="joint_0_j" cf="{2.17772170739081e-18,5.15650574819979e-06,51217.7437879303,-4.49799450640239,-134674.739366314}"/>
+					<RevoluteJoint name="joint_1" active="true" prt_m="L2" prt_n="L1" mak_i="joint_1_i" mak_j="joint_1_j" cf="{-48616.8789332936,-16113.856197336,1.99049311600076e-09,42370.6556300633,-127835.88293128}"/>
+					<RevoluteJoint name="joint_2" active="true" prt_m="L3" prt_n="L2" mak_i="joint_2_i" mak_j="joint_2_j" cf="{-11361.9673170595,49941.5956638856,3.17309088841062e-09,-131319.165623505,-29875.7788723134}"/>
+					<RevoluteJoint name="joint_3" active="true" prt_m="L4" prt_n="L3" mak_i="joint_3_i" mak_j="joint_3_j" cf="{-49868.2794623396,11679.5498360962,1.24769291501084e-08,19372.6931661791,82715.763049848}"/>
+					<RevoluteJoint name="joint_4" active="true" prt_m="L5" prt_n="L4" mak_i="joint_4_i" mak_j="joint_4_j" cf="{-13811.0139127553,17919.7341477852,96599.3686566139,-21844.7277652323,-16836.6422059808}"/>
+					<RevoluteJoint name="joint_5" active="true" prt_m="L6" prt_n="L5" mak_i="joint_5_i" mak_j="joint_5_j" cf="{6440.45325933236,2507.77814350222,971.571404740942,19.0876834649987,-49.0328537385805}"/>
+				</JointPoolElement>
+				<GeneralMotionPoolElement __prop_name__="general_motion_pool">
+					<GeneralMotion name="ee" active="false" prt_m="L6" prt_n="ground" mak_i="tool0" mak_j="wobj0" cf="{0,0,0,0,0,0}" mp="{4.28409610909871e-16,0.225443,1.413995,0.785398163397447,-1.57079632679489,3.92699081698724}" mv="{0,0,0,0,0,0}" ma="{0,0,0,0,0,0}" pose_type="EULER321" vel_type="VEL" acc_type="ACC"/>
+				</GeneralMotionPoolElement>
+				<ForcePoolElement __prop_name__="force_pool"/>
+				<SolverPoolElement __prop_name__="solver_pool">
+					<UrInverseKinematicSolver root_num="8" which_root="8" max_iter_count="1" max_error="0"/>
+					<ForwardKinematicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+					<InverseDynamicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+					<ForwardDynamicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+				</SolverPoolElement>
+				<CalibratorPoolElement __prop_name__="calibrator_pool">
+					<Calibrator data_index="{0,1,2,3}" filter_window_size="30" tolerable_variance="0.05" velocity_ratio="{1,1,1,1,1,1}" torque_constant="{-0.35,-0.35,0.35,0.045,0.045,0.045}" torque_weight="{350,350,350,45,45,45}" velocity_dead_zone="{0.1,0.1,0.1,0.1,0.1,0.1}"/>
+				</CalibratorPoolElement>
+			</Model>
+			<Model name="UrModel" time="0">
+				<Environment __prop_name__="environment" gravity="{0,0,-9.8,0,0,0}"/>
+				<VariablePoolElement __prop_name__="variable_pool">
+					<MatrixVariable name="tool0_axis_home">{0,0,0,0,0,0}</MatrixVariable>
+					<MatrixVariable name="dh">{0.1388,0.595726,0.574191,0.105278,0.124673,0.10077}</MatrixVariable>
+				</VariablePoolElement>
+				<PartPoolElement __prop_name__="part_pool">
+					<Part name="ground" active="true" pe="{0,0,0,-0,0,-0}" vel="{0,0,0,0,0,0}" acc="{0,0,0,0,0,0}" inertia="{1,0,0,0,1,1,1,0,0,0}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_0_j" active="true" pe="{0,0,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="wobj0" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj1" active="true" pe="{-0.217592,-1.10198,0.0106634,2.94639444847191,0.0213804489823286,3.35480297764196}"/>
+							<Marker name="wobj2" active="true" pe="{0,0,0,0.261799387799149,0,0.261799387799149}"/>
+							<Marker name="wobj3" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj4" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj5" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj6" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj7" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj8" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj9" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj10" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj11" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj12" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj13" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj14" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj15" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj16" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj17" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj18" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj19" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj20" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj21" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj22" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj23" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj24" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj25" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj26" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj27" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj28" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj29" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj30" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj31" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="wobj32" active="true" pe="{0,0,0,-0,0,-0}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L1" active="true" pe="{0,0,0,-0,0,-0}" vel="{0,0,0,0,0,0}" acc="{0,0,0,0,0,0}" inertia="{0,0,0,0,0,0,-42.1862767072213,0,0,0}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_0_i" active="true" pe="{0,0,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="joint_1_j" active="true" pe="{0,0,0.1388,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L2" active="true" pe="{4.81559236931161e-18,3.85247389544929e-18,-1.04083408558608e-17,3.14159265358979,4.44305997370834e-17,3.14159265358979}" vel="{0,0,0,0,-4.94065645841247e-324,-4.94065645841247e-324}" acc="{0,0,0,0,0,0}" inertia="{0,-0.0714017943794443,0,-3103.70544566749,-12729.7467589128,-3076.65276972211,-10016.0286774118,1.31742874954125,0.495815835809995,8186.46649522112}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_1_i" active="true" pe="{0,0,0.1388,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_2_j" active="true" pe="{0,0,0.734526,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L3" active="true" pe="{-7.41847763774395e-17,-2.83707345810624e-18,-1.52655665885959e-16,3.14159265358979,7.52070652130808e-17,3.14159265358979}" vel="{-4.94065645841247e-324,0,0,0,-9.88131291682493e-324,-9.88131291682493e-324}" acc="{0,0,0,0,0,0}" inertia="{0,0.10907882035759,22411.1059735737,-2997.30341688398,-6124.65596037197,-6126.03205345864,0,0.271988180274282,0.149252183652513,-21439.7680950679}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_2_i" active="true" pe="{0,0,0.734526,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_3_j" active="true" pe="{0,0,1.308717,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L4" active="true" pe="{7.51472912844225e-18,-1.29076061898017e-16,-3.03793448730438e-16,3.14159265358979,7.85079089760591e-17,3.14159265358979}" vel="{-4.94065645841247e-324,0,0,-4.94065645841247e-324,-9.88131291682493e-324,-9.88131291682493e-324}" acc="{0,0,0,0,0,0}" inertia="{-4897.51633479128,-0.00240329574419941,-9931.00000574671,-6906.55780983793,0,-9904.4710292959,9904.57469407879,-0.0178194235883047,-0.0322856995371232,13058.8452181814}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_3_i" active="true" pe="{0,0,1.308717,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+							<Marker name="joint_4_j" active="true" pe="{0,0.124673,0.1388,0.785398163397448,0,0.785398163397448}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L5" active="true" pe="{2.79949153627875e-17,-9.90467091174955e-17,-2.56424931100255e-16,3.14159265358979,2.32478873337727e-16,3.14159265358979}" vel="{-4.94065645841247e-324,-4.94065645841247e-324,9.88131291682493e-324,-4.94065645841247e-324,-9.88131291682493e-324,-1.97626258336499e-323}" acc="{0,0,0,0,0,0}" inertia="{10836.0027292855,-0.00446428329695623,1345.58953520884,14753.5104736253,20445.3100126119,20280.2133403087,165.101786479696,-0.014486683888356,-0.0118299571197297,-1831.78515150222}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_4_i" active="true" pe="{0,0.124673,0.1388,0.785398163397448,0,0.785398163397448}"/>
+							<Marker name="joint_5_j" active="true" pe="{0,0.124673,1.413995,3.14159265358979,1.5707963267949,4.71238898038469}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+					<Part name="L6" active="true" pe="{-1.40653371653691e-13,0.225442999999738,1.41399500000004,3.14159265358975,1.57079632679493,1.57079632679486}" vel="{-4.94065645841247e-324,0,1.48219693752374e-323,-4.94065645841247e-324,-9.88131291682493e-324,-1.97626258336499e-323}" acc="{0,0,0,0,0,0}" inertia="{-712.186007845044,0.00214404035606785,-0.00259968759010102,77.1887186822657,-6.36263775487326,-6.36841542875185,-0.0119439728399347,0.00646844990340603,0.00664095242713145,-0.00842244438605353}">
+						<MarkerPoolElement __prop_name__="marker_pool">
+							<Marker name="joint_5_i" active="true" pe="{2.22044604925031e-16,0,-0.10077,4.71238898038469,0,4.71238898038469}"/>
+							<Marker name="tool0" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool1" active="true" pe="{-0.0121912799030779,-0.0124049023528454,0.207421842555362,-0,0,-0}"/>
+							<Marker name="tool2" active="true" pe="{-0.0122018914288337,-0.0121644180147909,0.207655659084837,-0,0,-0}"/>
+							<Marker name="tool3" active="true" pe="{-0.0113275415896075,-0.0122478776136894,0.207251220629665,-0,0,-0}"/>
+							<Marker name="tool4" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool5" active="true" pe="{-0.000473577346144029,0.00224039233382676,0.209958969706206,-0,0,-0}"/>
+							<Marker name="tool6" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool7" active="true" pe="{-0.000272065790045658,-0.000341714113509188,0.049558630508868,-0,0,-0}"/>
+							<Marker name="tool8" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool9" active="true" pe="{0.00267001806520085,-0.00111891112321135,0.104652952882138,-0,0,-0}"/>
+							<Marker name="tool10" active="true" pe="{0.000638224950404781,-0.00214669395568704,0.104970834961942,-0,0,-0}"/>
+							<Marker name="tool11" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool12" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool13" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool14" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool15" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool16" active="true" pe="{0,0,0,-0,0,-0}"/>
+						</MarkerPoolElement>
+						<GeometryPoolElement __prop_name__="geometry_pool"/>
+					</Part>
+				</PartPoolElement>
+				<MotionPoolElement __prop_name__="motion_pool">
+					<Motion name="motion_0" active="true" prt_m="L1" prt_n="ground" mak_i="joint_0_i" mak_j="joint_0_j" cf="{9.048343800706e-07}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{21.0253421556551,43.9286787028362,0}"/>
+					<Motion name="motion_1" active="true" prt_m="L2" prt_n="L1" mak_i="joint_1_i" mak_j="joint_1_j" cf="{-4.49799449599413}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{23.1652167722768,32.9032484875696,372.471530430339}"/>
+					<Motion name="motion_2" active="true" prt_m="L3" prt_n="L2" mak_i="joint_2_i" mak_j="joint_2_j" cf="{-35.1853341988594}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{25.4041837445908,30.1082042279193,4.50063702255052}"/>
+					<Motion name="motion_3" active="true" prt_m="L4" prt_n="L3" mak_i="joint_3_i" mak_j="joint_3_j" cf="{-0.631057658873034}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{3.34339499550317,6.88468144289497,0.359216694192607}"/>
+					<Motion name="motion_4" active="true" prt_m="L5" prt_n="L4" mak_i="joint_4_i" mak_j="joint_4_j" cf="{0.106762419418648}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{2.54150042536336,5.51324979602637,0.505208157909716}"/>
+					<Motion name="motion_5" active="true" prt_m="L6" prt_n="L5" mak_i="joint_5_i" mak_j="joint_5_j" cf="{0.0310592200647506}" mp="{0}" mv="{0}" ma="{0}" component="5" pitch="0" rotate_range="0" mp_offset="0" mp_factor="1" frc_coe="{2.92285720106607,3.71712644416465,0.19676079543659}"/>
+				</MotionPoolElement>
+				<JointPoolElement __prop_name__="joint_pool">
+					<RevoluteJoint name="joint_0" active="true" prt_m="L1" prt_n="ground" mak_i="joint_0_i" mak_j="joint_0_j" cf="{2.17772170739081e-18,5.15650574819979e-06,51217.7437879303,-4.49799450640239,-134674.739366314}"/>
+					<RevoluteJoint name="joint_1" active="true" prt_m="L2" prt_n="L1" mak_i="joint_1_i" mak_j="joint_1_j" cf="{-48616.8789332936,-16113.856197336,1.99049311600076e-09,42370.6556300633,-127835.88293128}"/>
+					<RevoluteJoint name="joint_2" active="true" prt_m="L3" prt_n="L2" mak_i="joint_2_i" mak_j="joint_2_j" cf="{-11361.9673170595,49941.5956638856,3.17309088841062e-09,-131319.165623505,-29875.7788723134}"/>
+					<RevoluteJoint name="joint_3" active="true" prt_m="L4" prt_n="L3" mak_i="joint_3_i" mak_j="joint_3_j" cf="{-49868.2794623396,11679.5498360962,1.24769291501084e-08,19372.6931661791,82715.763049848}"/>
+					<RevoluteJoint name="joint_4" active="true" prt_m="L5" prt_n="L4" mak_i="joint_4_i" mak_j="joint_4_j" cf="{-13811.0139127553,17919.7341477852,96599.3686566139,-21844.7277652323,-16836.6422059808}"/>
+					<RevoluteJoint name="joint_5" active="true" prt_m="L6" prt_n="L5" mak_i="joint_5_i" mak_j="joint_5_j" cf="{6440.45325933236,2507.77814350222,971.571404740942,19.0876834649987,-49.0328537385805}"/>
+				</JointPoolElement>
+				<GeneralMotionPoolElement __prop_name__="general_motion_pool">
+					<GeneralMotion name="ee" active="false" prt_m="L6" prt_n="ground" mak_i="tool0" mak_j="wobj0" cf="{0,0,0,0,0,0}" mp="{4.28409610909871e-16,0.225443,1.413995,0.785398163397447,-1.57079632679489,3.92699081698724}" mv="{0,0,0,0,0,0}" ma="{0,0,0,0,0,0}" pose_type="EULER321" vel_type="VEL" acc_type="ACC"/>
+				</GeneralMotionPoolElement>
+				<ForcePoolElement __prop_name__="force_pool"/>
+				<SolverPoolElement __prop_name__="solver_pool">
+					<UrInverseKinematicSolver root_num="8" which_root="8" max_iter_count="1" max_error="0"/>
+					<ForwardKinematicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+					<InverseDynamicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+					<ForwardDynamicSolver root_num="1" which_root="0" max_iter_count="100" max_error="0.0000000001"/>
+				</SolverPoolElement>
+				<CalibratorPoolElement __prop_name__="calibrator_pool">
+					<Calibrator data_index="{0,1,2,3}" filter_window_size="30" tolerable_variance="0.05" velocity_ratio="{1,1,1,1,1,1}" torque_constant="{-0.35,-0.35,0.35,0.045,0.045,0.045}" torque_weight="{350,350,350,45,45,45}" velocity_dead_zone="{0.1,0.1,0.1,0.1,0.1,0.1}"/>
+				</CalibratorPoolElement>
+			</Model>
+		</ModelBasePool>
+	</MultiModel>
+    <EthercatMaster __prop_name__="master" name="ethercat_master" sample_period_ns="1000000">
+        <SlavePoolObject __prop_name__="slave_pool">
+            <EthercatSlave name="ethercat_slave" phy_id="3" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="4" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="5" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="6" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="7" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="8" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="12" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="13" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="14" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="15" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="16" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+            <EthercatSlave name="ethercat_slave" phy_id="17" is_virtual="true" vendor_id="0x00000616" product_code="0x00001420" revision_num="0x00000100" dc_assign_activate="0x00000300" sync0_shift_ns="1600000">
+                <SyncManagerPoolObject __prop_name__="sm_pool">
+                    <SyncManager is_tx="false"/>
+                    <SyncManager is_tx="true"/>
+                    <SyncManager is_tx="false">
+                        <Pdo index="0x1600">
+                            <PdoEntry name="target_pos" index="0x607a" subindex="0x00" size="32"/>
+                            <PdoEntry name="target_vel" index="0x60ff" subindex="0x00" size="32"/>
+                            <PdoEntry name="control_word" index="0x6040" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_operation" index="0x6060" subindex="0x00" size="8"/>
+                        </Pdo>
+                    </SyncManager>
+                    <SyncManager is_tx="true">
+                        <Pdo index="0x1a00">
+                            <PdoEntry name="status_word" index="0x6041" subindex="0x00" size="16"/>
+                            <PdoEntry name="mode_of_display" index="0x6061" subindex="0x00" size="8"/>
+                            <PdoEntry name="pos_actual_value" index="0x6064" subindex="0x00" size="32"/>
+                            <PdoEntry name="vel_actual_value" index="0x606c" subindex="0x00" size="32"/>
+                            <PdoEntry name="toq_actual_value" index="0x6077" subindex="0x00" size="16"/>
+                            <PdoEntry name="digital_inputs" index="0x60fd" subindex="0x00" size="32"/>
+                        </Pdo>
+                    </SyncManager>
+                </SyncManagerPoolObject>
+            </EthercatSlave>
+        </SlavePoolObject>
+    </EthercatMaster>
+    <Controller __prop_name__="controller">
+        <MotorPoolObject __prop_name__="motor_pool">
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="-83443.0268039999937173" pos_offset="-3.14159299999999986" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="-83443.0268039999937173" pos_offset="-3.14159299999999986" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.1416170000000001" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="3.14159299999999986" min_vel="-3.14159299999999986" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="6.54498499999999961" min_pos="-6.54498499999999961" max_vel="3.14159299999999986" min_vel="-3.14159299999999986" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="5.23598799999999986" min_pos="-5.23598799999999986" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="-83443.0268039999937173" pos_offset="-3.14159299999999986" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="2.61799399999999993" min_vel="-2.61799399999999993" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="-83443.0268039999937173" pos_offset="-3.14159299999999986" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="3.14159299999999986" min_vel="-3.14159299999999986" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.1416170000000001" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="3.0543260000000001" min_pos="-3.0543260000000001" max_vel="3.14159299999999986" min_vel="-3.14159299999999986" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="6.54498499999999961" min_pos="-6.54498499999999961" max_vel="3.14159299999999986" min_vel="-3.14159299999999986" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+            <EthercatMotor max_pos="5.23598799999999986" min_pos="-5.23598799999999986" max_vel="0" min_vel="-0" max_acc="6.28318499999999958" min_acc="-6.28318499999999958" max_pos_following_error="10" max_vel_following_error="20" pos_factor="83443.0268039999937173" pos_offset="3.14158099999999996" home_pos="0" vel_factor="1" enable_waiting_count="100" slave="0">
+                <EcMotIndexVec __prop_name__="ec_index">
+                    <EcMotIndex name="control_word" index="0x6040" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_operation" index="0x6060" sub_index="0x00"/>
+                    <EcMotIndex name="target_pos" index="0x607a" sub_index="0x00"/>
+                    <EcMotIndex name="target_vel" index="0x60ff" sub_index="0x00"/>
+                    <EcMotIndex name="target_toq" index="0x6071" sub_index="0x00"/>
+                    <EcMotIndex name="offset_vel" index="0x60b1" sub_index="0x00"/>
+                    <EcMotIndex name="offset_toq" index="0x60b2" sub_index="0x00"/>
+                    <EcMotIndex name="status_word" index="0x6041" sub_index="0x00"/>
+                    <EcMotIndex name="mode_of_display" index="0x6061" sub_index="0x00"/>
+                    <EcMotIndex name="actual_pos" index="0x6064" sub_index="0x00"/>
+                    <EcMotIndex name="actual_vel" index="0x606c" sub_index="0x00"/>
+                    <EcMotIndex name="actual_toq" index="0x6077" sub_index="0x00"/>
+                    <EcMotIndex name="actual_cur" index="0x6078" sub_index="0x00"/>
+                    <EcMotIndex name="output_io" index="0x60fe" sub_index="0x01"/>
+                    <EcMotIndex name="error_code" index="0x603f" sub_index="0x00"/>
+                </EcMotIndexVec>
+            </EthercatMotor>
+        </MotorPoolObject>
+        <DigitalIoPoolObject __prop_name__="digital_io_pool"/>
+        <AnalogIoPoolObject __prop_name__="analog_io_pool"/>
+        <FtSensorPoolObject __prop_name__="ft_sensor_pool"/>
+    </Controller>
+	<PlanRoot __prop_name__="plan_root">
+		<PlanPoolObject __prop_name__="plan_pool_object">
+			<ModelGet name="plan">
+				<Command __prop_name__="command" name="m_get">
+				</Command>
+			</ModelGet>
+			<ModelInit name="plan">
+				<Command __prop_name__="command" name="m_init">
+				</Command>
+			</ModelInit>
+			<ModelForward name="plan">
+				<Command __prop_name__="command" name="m_forward">
+				</Command>
+			</ModelForward>
+			<ModelSetPos name="plan">
+				<Command __prop_name__="command" name="m_set">
+				</Command>
+			</ModelSetPos>
+			<ModelMoveX name="plan">
+				<Command __prop_name__="command" name="m_x">
+					<GroupParam name="group_param">
+						<Param name="model" abbreviation="m" default="0"/>
+						<Param name="distance" abbreviation="d" default="10.0"/>
+						<Param name="orientation" abbreviation="o" default="1.0"/>
+					</GroupParam>
+				</Command>
+			</ModelMoveX>
+			<ModelComP name="plan">
+				<Command __prop_name__="command" name="m_comp">
+				</Command>
+			</ModelComP>
+			<ForceAlign name="plan">
+				<Command __prop_name__="command" name="m_fa">
+					<GroupParam name="group_param">
+						<Param name="model" abbreviation="m" default="0"/>
+					</GroupParam>
+				</Command>
+			</ForceAlign>
+			<ForceKeep name="plan">
+				<Command __prop_name__="command" name="m_fk">
+					<GroupParam name="group_param">
+						<Param name="model" abbreviation="m" default="0"/>
+					</GroupParam>
+				</Command>
+			</ForceKeep>
+			<ForceDrag name="plan">
+				<Command __prop_name__="command" name="m_fd">
+					<GroupParam name="group_param">
+						<Param name="model" abbreviation="m" default="0"/>
+					</GroupParam>
+				</Command>
+			</ForceDrag>
+			<ModelTest name="plan">
+				<Command __prop_name__="command" name="m_t">
+				</Command>
+			</ModelTest>
+		</PlanPoolObject>
+	</PlanRoot>
+    <InterfacePoolObject __prop_name__="interface"/>
+    <MiddleWare __prop_name__="middle_ware"/>
+    <TransferModelController __prop_name__="model_controller_transfer"/>
+    <CustomModule __prop_name__="custom_module"/>
+    <ControlServerErrorChecker __prop_name__="error_checker"/>
+</ControlServer>
