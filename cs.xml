@@ -101,7 +101,7 @@
 							<Marker name="tool13" active="true" pe="{0,0,0,-0,0,-0}"/>
 							<Marker name="tool14" active="true" pe="{0,0,0,-0,0,-0}"/>
 							<Marker name="tool15" active="true" pe="{0,0,0,-0,0,-0}"/>
-							<Marker name="tool16" active="true" pe="{0,0,0,-0,0,-0}"/>
+							<Marker name="tool16" active="true" pe="{0,0,0.143,-0,0,0}"/>
 						</MarkerPoolElement>
 						<GeometryPoolElement __prop_name__="geometry_pool"/>
 					</Part>
@@ -856,6 +856,10 @@
 				<Command __prop_name__="command" name="m_t">
 				</Command>
 			</ModelTest>
+			<PegInHole name="plan">
+				<Command __prop_name__="command" name="m_ph">
+				</Command>
+			</PegInHole>
 		</PlanPoolObject>
 	</PlanRoot>
     <InterfacePoolObject __prop_name__="interface"/>

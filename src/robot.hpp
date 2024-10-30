@@ -407,6 +407,76 @@ namespace robot
 
 	};
 
+	class PegInHole :public aris::core::CloneObject<PegInHole, aris::plan::Plan>
+	{
+	public:
+		auto virtual prepareNrt()->void;
+		auto virtual executeRT()->int;
+
+		virtual ~PegInHole();
+		explicit PegInHole(const std::string& name = "PegInHole");
+	private:
+		struct Imp;
+		aris::core::ImpPtr<Imp> imp_;
+
+		struct PegInHole::Imp {
+
+			//Flag
+			bool init = false;
+			bool stop = false;
+			bool phase1 = false;
+			bool phase2 = false;
+			bool phase3 = false;
+			bool phase4 = false;
+
+			//Force Compensation Parameter
+			double comp_f[6]{ 0 };
+
+			//Arm1
+			double arm1_init_force[6]{ 0 };
+			double arm1_p_vector[6]{ 0 };
+			double arm1_l_vector[6]{ 0 };
+
+			//Arm2
+			double arm2_init_force[6]{ 0 };
+			double arm2_p_vector[6]{ 0 };
+			double arm2_l_vector[6]{ 0 };
+
+			//Desired Pos, Vel, Acc, Foc
+			double arm1_x_d[6]{ 0 };
+			double arm2_x_d[6]{ 0 };
+
+			double v_d[6]{ 0 };
+			double a_d[6]{ 0 };
+			double f_d[6]{ 0 };
+
+			//Current Vel
+			double v_c[6]{ 0 };
+
+			//Impedence Parameter
+			double K[6]{ 100,100,100,15,15,15 };
+			double B[6]{ 100,100,100,15,15,15 };
+			double M[6]{ 1,1,1,10,10,10 };
+
+			double Ke[6]{ 220000,220000,220000,220000,220000,220000 };
+
+			//Counter
+			int contact_count = 0;
+			int current_count = 0;
+
+			//Test
+			double actual_force[6]{ 0 };
+
+			//Switch Model
+			int m_;
+
+			//Force Buffer
+			std::array<double, 10> force_buffer[6] = {};
+			int buffer_index[6]{ 0 };
+		};
+
+	};
+
 }
 
 
