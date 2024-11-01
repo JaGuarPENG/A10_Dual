@@ -2922,9 +2922,12 @@ namespace robot
 			aris::plan::Plan::CHECK_NONE |
 			aris::plan::Plan::NOT_CHECK_POS_CONTINUOUS_SECOND_ORDER;
 
-		//GravComp gc;
-		//gc.loadPLVector(imp_->arm1_p_vector, imp_->arm1_l_vector, imp_->arm2_p_vector, imp_->arm2_l_vector);
-		//mout() << "Load P & L Vector" << std::endl;
+		GravComp gc;
+		gc.loadPLVector(imp_->arm1_p_vector, imp_->arm1_l_vector, imp_->arm2_p_vector, imp_->arm2_l_vector);
+		mout() << "Load P & L Vector" << std::endl;
+		//		gc.loadInitForce(imp_->arm1_init_force, imp_->arm2_init_force);
+		//		mout() << "Load Init Force" << std::endl;
+		//		imp_->init = true;
 	}
 	auto PegInHole::executeRT() -> int
 	{
@@ -2944,14 +2947,17 @@ namespace robot
 		auto& eeA2 = dynamic_cast<aris::dynamic::GeneralMotion&>(model_a2.generalMotionPool().at(0));
 
 		//ver 1.0 not limit on vel, only limit force
-		static double tolerance = 0.0001;
+		static double tolerance = 0.00005;
 		static double init_angle[12] =
 		{ 0, 0, 5 * PI / 6, -5 * PI / 6, -PI / 2, 0 ,
 		0, 0, -5 * PI / 6, 5 * PI / 6, PI / 2, 0 };
-		static double max_vel[6]{ 0.2,0.2,0.2,0.0005,0.0005,0.0001 };
+		//ver 2.0 limited vel, 20mm/s, 30deg/s
+		static double max_vel[6]{ 0.00002,0.00002,0.00002,0.0005,0.0005,0.0005 };
+
 		static double trigger_force[6]{ 0.5,0.5,0.5,0.001,0.001,0.001 };
-		static double max_force[6]{ 10,10,10,5,5,5 };
-		static double trigger_vel[6]{ 0.0001,0.0001,0.0001,0.0001,0.0001,0.0001 };
+
+		static double trigger_vel[6]{ 0.000001,0.000001,0.000001,0.0001,0.0001,0.0001 };
+		static double dead_zone[6]{ 0.1,0.1,0.1,0.0006,0.00920644,0.0006 };
 
 
 		GravComp gc;
@@ -2975,7 +2981,7 @@ namespace robot
 
 			for (std::size_t i = 0; i < 6; ++i)
 			{
-				if (ecMaster()->slavePool()[9 + 9 * m_].readPdo(0x6020, 0x01 + i, raw_force + i, 32))
+				if (ecMaster()->slavePool()[8 + 7 * m_].readPdo(0x6020, 0x01 + i, raw_force + i, 32))
 					mout() << "error" << std::endl;
 
 				data_[i] = (static_cast<double>(raw_force[i]) / 1000.0);
@@ -3039,7 +3045,6 @@ namespace robot
 			}
 		};
 
-
 		auto motorsPositionCheck = [](const double* current_sa_angle_, const double* target_pos_, size_t dim_)
 		{
 			for (int i = 0; i < dim_; i++)
@@ -3076,7 +3081,6 @@ namespace robot
 				}
 			}
 		};
-
 
 
 
@@ -3126,37 +3130,93 @@ namespace robot
 			}
 		};
 
+		auto forceDeadZone = [&](double* actual_force_, double* area_)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				if (abs(actual_force_[i]) < area_[i])
+				{
+					actual_force_[i] = 0;
+				}
+			}
+		};
 
+		auto forceTransform = [&](double* actual_force_, double* transform_force_, int m_)
+		{
+			if (m_ == 0)
+			{
+				transform_force_[0] = actual_force_[2];
+				transform_force_[1] = -actual_force_[1];
+				transform_force_[2] = actual_force_[0];
 
-		//for (std::size_t i = 0; i < 6; ++i)
-		//{
-		//	imp_->actual_force[i] = 0;
-		//}
+				transform_force_[3] = actual_force_[5];
+				transform_force_[4] = -actual_force_[4];
+				transform_force_[5] = actual_force_[3];
+			}
+			else if (m_ == 1)
+			{
+				transform_force_[0] = -actual_force_[2];
+				transform_force_[1] = actual_force_[1];
+				transform_force_[2] = actual_force_[0];
 
+				transform_force_[3] = -actual_force_[5];
+				transform_force_[4] = actual_force_[4];
+				transform_force_[5] = actual_force_[3];
+			}
+			else
+			{
+				mout() << "Error Model In Force Transform" << std::endl;
+			}
+		};
 
+		auto forceCheck = [&](double* current_force_, double* force_check_, int count_)
+		{
 
-		//if (count() > 5000 && count() <= 7000)
-		//{
-		//	//mout() << "fex" << std::endl;
-		//	imp_->actual_force[0] = -5;
-		//}
-		//else if (count() > 9000 && count() <= 10000)
-		//{
-		//	//mout() << "fex" << std::endl;
-		//	imp_->actual_force[0] = 5;
-		//}
+			bool isValid = true;
+			for (int i = 0; i < 3; i++)
+			{
+				if (abs(current_force_[i]) > force_check_[i])
+				{
+					isValid = false;
+					break;
+				}
+			}
 
+			if (isValid)
+			{
+				if (imp_->allign_count == 0) {
+					imp_->allign_count = count();
+				}
 
-		 //else if (count() > 2000 && count() <= 3000)
-		 //{
-		 //	imp_->actual_force[2] = -10;
-		 //	imp_->actual_force[0] = -15;
-		 //}
-		 //else if (count() > 3000 && count() <= 4000)
-		 //{
-		 //	//imp_->actual_force[1] = -5;
-		 //	imp_->actual_force[4] = -6;
-		 //}
+				if ((count() - imp_->allign_count) % 30 == 0) {
+					imp_->success_count++;
+					mout() << "Check " << imp_->success_count << '\t' << "Current Count: " << count() << std::endl;
+					if (imp_->success_count >= count_)
+					{
+						return true;
+					}
+				}
+			}
+			else
+			{
+				imp_->success_count = 0;
+			}
+
+			return false;
+		};
+
+		auto velDeadZone = [&](double vel_, double vel_limit_)
+		{
+			if (vel_ >= vel_limit_)
+			{
+				vel_ = vel_limit_;
+			}
+			else if (vel_ <= -vel_limit_)
+			{
+				vel_ = -vel_limit_;
+			}
+
+		};
 
 
 
@@ -3166,159 +3226,326 @@ namespace robot
 			current_angle[i] = controller()->motorPool()[i].actualPos();
 		}
 
+
 		std::copy(current_angle, current_angle + 6, current_sa_angle);
 
 
-		if (!imp_->init && !imp_->phase1)
+
+		if (!imp_->init)
 		{
+			double assem_pos[6]{ 0.730, 0.039101, 0.291316, PI / 2, -PI / 2, PI / 2 };
+			double init_angle[6]{ 0 };
 
-
-
-			dualArm.setInputPos(init_angle);
-
-			if (dualArm.forwardKinematics())
-			{
-				throw std::runtime_error("Forward Kinematics Position Failed!");
-			}
-
-			//Test
-			for (std::size_t i = 0; i < 12; ++i)
-			{
-				controller()->motorPool()[i].setTargetPos(init_angle[i]);
-			}
-
-			//daJointMove(init_angle);
-
-			if (count() % 1000 == 0)
-			{
-
-				mout() << current_angle[0] << '\t' << current_angle[1] << '\t' << current_angle[2] << '\t'
-					<< current_angle[3] << '\t' << current_angle[4] << '\t' << current_angle[5] << std::endl;
-
-			}
-
-			if (motorsPositionCheck(current_angle, init_angle, 12))
-			{
- 
-				//getForceData(imp_->arm1_init_force, 0, imp_->init);
-				//getForceData(imp_->arm2_init_force, 1, imp_->init);
-
-				mout() << "Back To Init" << std::endl;
-				imp_->init = true;
-			}
-
-
-		}
-		//Phase 1 Approach to The Hole
-		else if (imp_->init && !imp_->phase1)
-		{
-			//Tool
-			double assem_pos[6]{ 0.600, 0.039101, 0.291316, PI / 2, -PI / 2, PI / 2 };
-			double assem_angle[6]{ 0 };
-			double assem_rm[9]{ 0 };
-			double assem_pm[16]{ 0 };
-			double stop_count = 2000;
-
-			//Define Initial Rotate Error
-			double rotate_angle[3]{ 0,15 * 2 * PI / 360, 0 };
-			double rotate_rm[9]{ 0 };
-			double desired_rm[9]{ 0 };
-
-			aris::dynamic::s_ra2rm(rotate_angle, rotate_rm);
-			aris::dynamic::s_re2rm(assem_pos + 3, assem_rm, "321");
-			aris::dynamic::s_mm(3, 3, 3, rotate_rm, assem_rm, desired_rm);
-			aris::dynamic::s_rm2re(desired_rm, assem_pos + 3, "321");
-
-
-			eeA1.getP(current_pos);
-			eeA1.setP(assem_pos);
-
-
+			model_a1.setOutputPos(assem_pos);
 			if (model_a1.inverseKinematics())
 			{
-				mout() << "Assem Pos Inverse Failed" << std::endl;
+				mout() << "Error" << std::endl;
 			}
 
-			model_a1.getInputPos(assem_angle);
+			model_a1.getInputPos(init_angle);
 
-			saJointMove(assem_angle, 0);
+			saJointMove(init_angle, 0);
 
-
-
-			if (count() % 1000 == 0)
+			if (motorsPositionCheck(current_sa_angle, init_angle, 6))
 			{
-				mout() << "angle: " << current_sa_angle[0] << '\t' << current_sa_angle[1] << '\t' << current_sa_angle[2] << '\t'
-					<< current_sa_angle[3] << '\t' << current_sa_angle[4] << '\t' << current_sa_angle[5] << std::endl;
+				getForceData(imp_->arm1_init_force, 0, imp_->init);
+				getForceData(imp_->arm2_init_force, 0, imp_->init);
+
+				gc.saveInitForce(imp_->arm1_init_force, imp_->arm2_init_force);
+
+				mout() << "Init Complete" << std::endl;
+
+				imp_->init = true;
+			}
+		}
+		else
+		{
+
+			eeA1.getP(current_pos);
+			eeA1.getMpm(current_pm);
+
+			//Force Comp, Filtered, Transform
+			getForceData(actual_force, 0, imp_->init);
+			gc.getCompFT(current_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force);
+			for (size_t i = 0; i < 6; i++)
+			{
+				comp_force[i] = actual_force[i] + comp_force[i];
 			}
 
+			forceFilter(comp_force, filtered_force);
+			forceDeadZone(filtered_force, dead_zone);
+			forceTransform(filtered_force, transform_force, 0);
 
-			if (motorsPositionCheck(current_sa_angle, assem_angle, 6) && !imp_->stop)
+			//Phase 1 Approach to The Hole
+			if (!imp_->phase1)
 			{
-				mout() << "end angle: " << current_sa_angle[0] << '\t' << current_sa_angle[1] << '\t' << current_sa_angle[2] << '\t'
-					<< current_sa_angle[3] << '\t' << current_sa_angle[4] << '\t' << current_sa_angle[5] << std::endl;
+				//Tool
+				double assem_pos[6]{ 0.730, 0.039101, 0.291316, PI / 2, -PI / 2, PI / 2 };
+				double assem_angle[6]{ 0 };
+				double assem_rm[9]{ 0 };
 
-				mout() << "Assembly Start Pos Reached" << std::endl;
+				//Define Initial Rotate Error
+				double rotate_angle[3]{ 0,15 * 2 * PI / 360, 0 };
+				double rotate_rm[9]{ 0 };
+				double desired_rm[9]{ 0 };
 
-				imp_->current_count = count();
-				imp_->stop = true;
+				aris::dynamic::s_ra2rm(rotate_angle, rotate_rm);
+				aris::dynamic::s_re2rm(assem_pos + 3, assem_rm, "321");
+				aris::dynamic::s_mm(3, 3, 3, rotate_rm, assem_rm, desired_rm);
+				aris::dynamic::s_rm2re(desired_rm, assem_pos + 3, "321");
+
+				eeA1.setP(assem_pos);
 
 
-			}
-			if (imp_->stop)
-			{
-				if (imp_->current_count + stop_count == count())
+				if (model_a1.inverseKinematics())
+				{
+					mout() << "Assem Pos Inverse Failed" << std::endl;
+				}
+
+				model_a1.getInputPos(assem_angle);
+
+				saJointMove(assem_angle, 0);
+				if (motorsPositionCheck(current_sa_angle, assem_angle, 6))
 				{
 					imp_->phase1 = true;
 					mout() << "Assembly Start !" << std::endl;
 				}
+
 			}
-
-
-		}
-		else if(imp_->phase1 && !imp_->phase2)
-		{
-			double raw_force_checker[6]{ 0 };
-			double comp_force_checker[6]{ 0 };
-			double force_checker[6]{ 0 };
-
-			double a1_pm[16]{ 0 };
-			eeA1.getMpm(a1_pm);
-			eeA1.getP(current_pos);
-
-			if (current_pos[0] >= 0.610)
+			//Phase 2 Contact, Have Certain Position Adjustment
+			else if (imp_->phase1 && !imp_->phase2)
 			{
-				imp_->actual_force[0] = -0.5;
-			}
+				double raw_force_checker[6]{ 0 };
+				double comp_force_checker[6]{ 0 };
+				double force_checker[6]{ 0 };
 
-			//Arm1
-			//getForceData(raw_force_checker, 0, imp_->init);
-			//gc.getCompFT(a1_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force_checker);
-			if (count() % 100 == 0) 
-			{
-				mout() << "pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
-					<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
-			}
-			
-			for (int i = 0; i < 6; i++)
-			{
-				//force_checker[i] = comp_force_checker[i] + raw_force_checker[i];
-				if (abs(imp_->actual_force[i]) > 0.2)
+				double a1_pm[16]{ 0 };
+				eeA1.getMpm(a1_pm);
+				eeA1.getP(current_pos);
+
+				if (count() % 100 == 0)
 				{
-					imp_->phase2 = true;
-					mout() << "Contact Check" << std::endl;
-					return 0;
-					break;
+					mout() << "force: " << transform_force[0] << '\t' << transform_force[1] << '\t' << transform_force[2] << '\t'
+						<< transform_force[3] << '\t' << transform_force[4] << '\t' << transform_force[5] << std::endl;
+				}
 
+
+				//Arm1
+				getForceData(raw_force_checker, 0, imp_->init);
+				gc.getCompFT(a1_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force_checker);
+				if (count() % 1000 == 0)
+				{
+					mout() << "pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+						<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+				}
+
+				for (int i = 0; i < 6; i++)
+				{
+					force_checker[i] = comp_force_checker[i] + raw_force_checker[i];
+					if (abs(force_checker[i]) > 1.0)
+					{
+						imp_->phase2 = true;
+						mout() << "Contact Check" << std::endl;
+						mout() << "Contact Pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+							<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+						break;
+
+					}
+
+				}
+				if (!imp_->phase2)
+				{
+					current_pos[0] += 0.00001;
+					saMove(current_pos, model_a1, 0);
 				}
 
 			}
-			if (!imp_->phase2)
+			//Phase 3 Pose Adjust, Position Decised, Pose Move Only
+			else if (imp_->phase2 && !imp_->phase3)
 			{
-				current_pos[0] += 0.00001;
-				saMove(current_pos, model_a1, 0);
-			}
 
+				double acc[3]{ 0 };
+				double ome[3]{ 0 };
+
+				double dx[3]{ 0 };
+				double dth[3]{ 0 };
+				double dt = 0.001;
+
+				double desired_force[6]{ 0,0,0,0,0,0 };
+
+				//Safety Check
+				for (size_t i = 0; i < 3; i++)
+				{
+					if (abs(transform_force[i]) > 20.0)
+					{
+						mout() << "Emergency Brake" << std::endl;
+						return 0;
+					}
+				}
+				if (count() % 100 == 0)
+				{
+					mout() << "force: " << transform_force[0] << '\t' << transform_force[1] << '\t' << transform_force[2] << '\t'
+						<< transform_force[3] << '\t' << transform_force[4] << '\t' << transform_force[5] << std::endl;
+					mout() << "pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+						<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+				}
+
+				if (forceCheck(transform_force, desired_force, 5))
+				{
+					imp_->phase3 = true;
+					mout() << "Allign Complete" << std::endl;
+					mout() << "Allign Pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+						<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+					mout() << "Allign force: " << transform_force[0] << '\t' << transform_force[1] << '\t' << transform_force[2] << '\t'
+						<< transform_force[3] << '\t' << transform_force[4] << '\t' << transform_force[5] << std::endl;
+				}
+				else
+				{
+					//Impedence Controller
+					for (int i = 0; i < 3; i++)
+					{
+						// da = (Fd-Fe-Bd*(v-vd)-k*(x-xd))/M
+						acc[i] = (-imp_->phase3_fd[i] + transform_force[i] - imp_->phase3_B[i] * (imp_->v_c[i] - imp_->v_d[i])) / imp_->phase3_M[i];
+					}
+
+
+					for (int i = 0; i < 3; i++)
+					{
+						imp_->v_c[i] += acc[i] * dt;
+						velDeadZone(imp_->v_c[i], max_vel[i]);
+						dx[i] = imp_->v_c[i] * dt + acc[i] * dt * dt;
+						current_pos[i] = dx[i] + current_pos[i];
+
+					}
+
+					//pose
+					for (int i = 1; i < 3; i++)
+					{
+						// Caculate Omega
+						ome[i] = (-imp_->phase3_fd[i + 3] + transform_force[i + 3] - imp_->phase3_B[i + 3] * (imp_->v_c[i + 3] - imp_->v_d[i + 3])) / imp_->phase3_M[i + 3];
+					}
+
+
+					for (int i = 1; i < 3; i++)
+					{
+						// Angluar Velocity
+						imp_->v_c[i + 3] += ome[i] * dt;
+						velDeadZone(imp_->v_c[i + 3], max_vel[i + 3]);
+						dth[i] = imp_->v_c[i + 3] * dt;
+					}
+
+					double drm[9]{ 0 };
+					double rm_target[9]{ 0 };
+					double rm_c[9]{ 0 };
+
+					//Transform to rm
+					aris::dynamic::s_ra2rm(dth, drm);
+
+					//Current pe to rm
+					aris::dynamic::s_re2rm(current_pos + 3, rm_c, "321");
+
+					//Calcuate Future rm
+					aris::dynamic::s_mm(3, 3, 3, drm, rm_c, rm_target);
+
+					//Convert rm to pe
+					aris::dynamic::s_rm2re(rm_target, current_pos + 3, "321");
+
+					saMove(current_pos, model_a1, 0);
+				}
+			}
+			//Phase 4 Insert
+			else if (imp_->phase3 && !imp_->phase4)
+			{
+				double acc[3]{ 0 };
+				double ome[3]{ 0 };
+
+				double dx[3]{ 0 };
+				double dth[3]{ 0 };
+				double dt = 0.001;
+				double desired_force[6]{ 0,0,0,0,0,0 };
+
+
+				//Safety Check
+				for (size_t i = 0; i < 3; i++)
+				{
+					if (abs(transform_force[i]) > 5)
+					{
+						mout() << "Emergency Brake" << std::endl;
+						return 0;
+					}
+				}
+
+				if (count() % 100 == 0)
+				{
+					mout() << "force: " << transform_force[0] << '\t' << transform_force[1] << '\t' << transform_force[2] << '\t'
+						<< transform_force[3] << '\t' << transform_force[4] << '\t' << transform_force[5] << std::endl;
+					mout() << "pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+						<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+				}
+
+				//Complete Check
+				if (current_pos[0] >= 0.850)
+				{
+					imp_->phase4 = true;
+					mout() << "Insert Complete" << std::endl;
+					mout() << "Complete Pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+						<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+				}
+				else
+				{
+					//Impedence Controller
+					for (int i = 0; i < 3; i++)
+					{
+						// da = (Fd-Fe-Bd*(v-vd)-k*(x-xd))/M
+						acc[i] = (-imp_->phase4_fd[i] + transform_force[i] - imp_->phase4_B[i] * (imp_->v_c[i] - imp_->v_d[i])) / imp_->phase4_M[i];
+					}
+
+
+					for (int i = 0; i < 3; i++)
+					{
+						imp_->v_c[i] += acc[i] * dt;
+						dx[i] = imp_->v_c[i] * dt + acc[i] * dt * dt;
+						current_pos[i] = dx[i] + current_pos[i];
+
+					}
+
+
+					//pose
+					for (int i = 0; i < 3; i++)
+					{
+						// Caculate Omega
+						ome[i] = (-imp_->phase4_fd[i + 3] + transform_force[i + 3] - imp_->phase4_B[i + 3] * (imp_->v_c[i + 3] - imp_->v_d[i + 3])) / imp_->phase4_M[i + 3];
+					}
+
+
+					for (int i = 0; i < 3; i++)
+					{
+						// Angluar Velocity
+						imp_->v_c[i + 3] += ome[i] * dt;
+						dth[i] = imp_->v_c[i + 3] * dt;
+					}
+
+					double drm[9]{ 0 };
+					double rm_target[9]{ 0 };
+					double rm_c[9]{ 0 };
+
+					//Transform to rm
+					aris::dynamic::s_ra2rm(dth, drm);
+
+					//Current pe to rm
+					aris::dynamic::s_re2rm(current_pos + 3, rm_c, "321");
+
+					//Calcuate Future rm
+					aris::dynamic::s_mm(3, 3, 3, drm, rm_c, rm_target);
+
+					//Convert rm to pe
+					aris::dynamic::s_rm2re(rm_target, current_pos + 3, "321");
+
+					saMove(current_pos, model_a1, 0);
+				}
+			}
 		}
+
 
 		return 80000 - count();
 	}
@@ -3330,6 +3557,215 @@ namespace robot
 	PegInHole::~PegInHole() = default;
 
 
+	auto PegOutHole::prepareNrt() -> void
+	{
+		for (auto& m : motorOptions()) m =
+			aris::plan::Plan::CHECK_NONE |
+			aris::plan::Plan::NOT_CHECK_POS_CONTINUOUS_SECOND_ORDER;
+
+		GravComp gc;
+		gc.loadPLVector(imp_->arm1_p_vector, imp_->arm1_l_vector, imp_->arm2_p_vector, imp_->arm2_l_vector);
+		mout() << "Load P & L Vector" << std::endl;
+		gc.loadInitForce(imp_->arm1_init_force, imp_->arm2_init_force);
+		mout() << "Load Init Force" << std::endl;
+	}
+	auto PegOutHole::executeRT() -> int
+	{
+		//dual transform modelbase into multimodel
+		auto& dualArm = dynamic_cast<aris::dynamic::MultiModel&>(modelBase()[0]);
+		//at(0) -> Arm1 -> white
+		auto& arm1 = dualArm.subModels().at(0);
+		//at(1) -> Arm2 -> blue
+		auto& arm2 = dualArm.subModels().at(1);
+
+		//transform to model
+		auto& model_a1 = dynamic_cast<aris::dynamic::Model&>(arm1);
+		auto& model_a2 = dynamic_cast<aris::dynamic::Model&>(arm2);
+
+		//End Effector
+		auto& eeA1 = dynamic_cast<aris::dynamic::GeneralMotion&>(model_a1.generalMotionPool().at(0));
+		auto& eeA2 = dynamic_cast<aris::dynamic::GeneralMotion&>(model_a2.generalMotionPool().at(0));
+
+
+		GravComp gc;
+
+		static double d_pos = 0.00001;
+
+		double current_angle[12]{ 0 };
+
+		double comp_force[6]{ 0 };
+		double current_pm[16]{ 0 };
+		double current_pos[6]{ 0 };
+		double actual_force[6]{ 0 };
+		double transform_force[6]{ 0 };
+
+
+		auto getForceData = [&](double* data_, int m_, bool init_)
+		{
+
+			int raw_force[6]{ 0 };
+
+			for (std::size_t i = 0; i < 6; ++i)
+			{
+				if (ecMaster()->slavePool()[8 + 7 * m_].readPdo(0x6020, 0x01 + i, raw_force + i, 32))
+					mout() << "error" << std::endl;
+
+				data_[i] = (static_cast<double>(raw_force[i]) / 1000.0);
+
+			}
+
+			if (!init_)
+			{
+				mout() << "Compensate Init Force" << std::endl;
+			}
+			else
+			{
+				if (m_ == 0)
+				{
+					for (std::size_t i = 0; i < 6; ++i)
+					{
+
+						data_[i] = (static_cast<double>(raw_force[i]) / 1000.0) - imp_->arm1_init_force[i];
+
+					}
+				}
+				else if (m_ == 1)
+				{
+					for (std::size_t i = 0; i < 6; ++i)
+					{
+
+						data_[i] = (static_cast<double>(raw_force[i]) / 1000.0) - imp_->arm2_init_force[i];
+
+					}
+				}
+				else
+				{
+					mout() << "Wrong Model" << std::endl;
+				}
+
+			}
+
+		};
+
+		auto saMove = [&](double* pos_, aris::dynamic::Model& model_, int type_) {
+
+			model_.setOutputPos(pos_);
+
+			if (model_.inverseKinematics())
+			{
+				throw std::runtime_error("Inverse Kinematics Position Failed!");
+			}
+
+
+			double x_joint[6]{ 0 };
+
+			model_.getInputPos(x_joint);
+
+			if (type_ == 0)
+			{
+				for (std::size_t i = 0; i < 6; ++i)
+				{
+					controller()->motorPool()[i].setTargetPos(x_joint[i]);
+				}
+			}
+			else if (type_ == 1)
+			{
+				for (std::size_t i = 0; i < 6; ++i)
+				{
+					controller()->motorPool()[i + 6].setTargetPos(x_joint[i]);
+				}
+			}
+			else
+			{
+				throw std::runtime_error("Arm Type Error");
+			}
+		};
+
+		auto forceTransform = [&](double* actual_force_, double* transform_force_, int m_)
+		{
+			if (m_ == 0)
+			{
+				transform_force_[0] = actual_force_[2];
+				transform_force_[1] = -actual_force_[1];
+				transform_force_[2] = actual_force_[0];
+
+				transform_force_[3] = actual_force_[5];
+				transform_force_[4] = -actual_force_[4];
+				transform_force_[5] = actual_force_[3];
+			}
+			else if (m_ == 1)
+			{
+				transform_force_[0] = -actual_force_[2];
+				transform_force_[1] = actual_force_[1];
+				transform_force_[2] = actual_force_[0];
+
+				transform_force_[3] = -actual_force_[5];
+				transform_force_[4] = actual_force_[4];
+				transform_force_[5] = actual_force_[3];
+			}
+			else
+			{
+				mout() << "Error Model In Force Transform" << std::endl;
+			}
+		};
+
+		for (int i = 0; i < 12; i++)
+		{
+			current_angle[i] = controller()->motorPool()[i].actualPos();
+		}
+
+		if (count() == 1)
+		{
+			dualArm.setInputPos(current_angle);
+			if (dualArm.forwardKinematics()) { mout() << "Error" << std::endl; }
+			mout() << "Init" << std::endl;
+		}
+
+
+
+		eeA1.getP(current_pos);
+		eeA1.getMpm(current_pm);
+
+		getForceData(actual_force, 0, true);
+		gc.getCompFT(current_pm, imp_->arm1_l_vector, imp_->arm1_p_vector, comp_force);
+		for (size_t i = 0; i < 6; i++)
+		{
+			comp_force[i] = actual_force[i] + comp_force[i];
+		}
+
+		forceTransform(comp_force, transform_force, 0);
+
+		//Safety Check
+		for (size_t i = 0; i < 3; i++)
+		{
+			if (abs(transform_force[i]) > 30)
+			{
+				mout() << "Emergency Brake" << std::endl;
+				return 0;
+			}
+		}
+
+		if (count() % 1000 == 0)
+		{
+			mout() << "pos: " << current_pos[0] << '\t' << current_pos[1] << '\t' << current_pos[2] << '\t'
+				<< current_pos[3] << '\t' << current_pos[4] << '\t' << current_pos[5] << std::endl;
+		}
+
+
+		current_pos[0] -= d_pos;
+
+		saMove(current_pos, model_a1, 0);
+
+
+
+		return 8000 - count();
+	}
+	PegOutHole::PegOutHole(const std::string& name)
+	{
+		aris::core::fromXmlString(command(),
+			"<Command name=\"m_po\"/>");
+	}
+	PegOutHole::~PegOutHole() = default;
 
 
 
@@ -3355,6 +3791,8 @@ namespace robot
 		aris::core::class_<ModelTest>("ModelTest")
 			.inherit<aris::plan::Plan>();
 		aris::core::class_<PegInHole>("PegInHole")
+			.inherit<aris::plan::Plan>();
+		aris::core::class_<PegOutHole>("PegOutHole")
 			.inherit<aris::plan::Plan>();
 
 	}

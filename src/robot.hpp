@@ -422,12 +422,14 @@ namespace robot
 		struct PegInHole::Imp {
 
 			//Flag
+			//Phase 1 -> Approach, Phase 2 -> Contact, Phase 3 -> Align, Phase 4 -> Fit, Phase 5 -> Insert
 			bool init = false;
 			bool stop = false;
 			bool phase1 = false;
 			bool phase2 = false;
 			bool phase3 = false;
 			bool phase4 = false;
+			bool phase5 = false;
 
 			//Force Compensation Parameter
 			double comp_f[6]{ 0 };
@@ -450,22 +452,38 @@ namespace robot
 			double a_d[6]{ 0 };
 			double f_d[6]{ 0 };
 
+			//Desired Force of Each Phase
+			double phase2_fd[6]{ 0 };
+			double phase3_fd[6]{ -2.5,0,0,0,0,0 };
+			double phase4_fd[6]{ -2.0,0,0,0,0,0 };
+			double phase5_fd[6]{ 0 };
+
+			//Desired Pos of Each Phase
+			double phase2_xd[6]{ 0 };
+
 			//Current Vel
 			double v_c[6]{ 0 };
 
 			//Impedence Parameter
-			double K[6]{ 100,100,100,15,15,15 };
-			double B[6]{ 100,100,100,15,15,15 };
-			double M[6]{ 1,1,1,10,10,10 };
+			//double K[6]{ 100,100,100,15,15,15 };
+			double phase3_B[6]{ 1000,1000,1000,3,3,3 };
+			double phase3_M[6]{ 10,10,10,2,2,2 };
 
-			double Ke[6]{ 220000,220000,220000,220000,220000,220000 };
+			double phase4_B[6]{ 1000,1500,1500,50,50,50 };
+			double phase4_M[6]{ 10,10,10,10,10,10 };
+
+			double phase5_B[6]{ 100,100,100,10,10,10 };
+			double phase5_M[6]{ 1,1,1,10,10,10 };
+
 
 			//Counter
 			int contact_count = 0;
 			int current_count = 0;
+			int allign_count = 0;
+			int success_count = 0;
 
 			//Test
-			double actual_force[6]{ 0 };
+			//double actual_force[6]{ 0 };
 
 			//Switch Model
 			int m_;
@@ -476,6 +494,41 @@ namespace robot
 		};
 
 	};
+
+
+	class PegOutHole :public aris::core::CloneObject<PegOutHole, aris::plan::Plan>
+	{
+	public:
+		auto virtual prepareNrt()->void;
+		auto virtual executeRT()->int;
+
+		virtual ~PegOutHole();
+		explicit PegOutHole(const std::string& name = "PegOutHole");
+	private:
+		struct Imp;
+		aris::core::ImpPtr<Imp> imp_;
+
+		struct PegOutHole::Imp {
+
+			//Flag
+			bool init = false;
+
+			//Arm1
+			double arm1_init_force[6]{ 0 };
+			double arm1_p_vector[6]{ 0 };
+			double arm1_l_vector[6]{ 0 };
+
+			//Arm2
+			double arm2_init_force[6]{ 0 };
+			double arm2_p_vector[6]{ 0 };
+			double arm2_l_vector[6]{ 0 };
+
+		};
+
+	};
+
+
+
 
 }
 
