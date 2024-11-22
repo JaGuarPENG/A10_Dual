@@ -124,6 +124,13 @@ namespace robot
 
 			//Switch Model
 			int m_;
+
+
+			//Pos Counter
+			int pos_count = 0;
+			int pos_success_count = 0;
+
+			double current_pos_checkek[6] = { 0 };
 		};
 
 	};
@@ -430,6 +437,7 @@ namespace robot
 			bool phase3 = false;
 			bool phase4 = false;
 			bool phase5 = false;
+			bool phase6 = false;
 
 			//Force Compensation Parameter
 			double comp_f[6]{ 0 };
@@ -454,9 +462,10 @@ namespace robot
 
 			//Desired Force of Each Phase
 			double phase2_fd[6]{ 0 };
-			double phase3_fd[6]{ -2.5,0,0,0,0,0 };
-			double phase4_fd[6]{ -2.0,0,0,0,0,0 };
-			double phase5_fd[6]{ 0 };
+			double phase3_fd[6]{ -4.5,0,0,0,0,0 };
+			double phase4_fd[6]{ -3.5,0,0,0,0,0 };
+			double phase5_fd[6]{ -5.0,0,0,0,0,0 };
+			double phase6_fd[6]{ 0,0,0,0,0,0 };
 
 			//Desired Pos of Each Phase
 			double phase2_xd[6]{ 0 };
@@ -465,22 +474,32 @@ namespace robot
 			double v_c[6]{ 0 };
 
 			//Impedence Parameter
-			//double K[6]{ 100,100,100,15,15,15 };
-			double phase3_B[6]{ 1000,1000,1000,3,3,3 };
-			double phase3_M[6]{ 10,10,10,2,2,2 };
+			double phase3_B[6]{ 1500,1500,1500,0,0,0 };
+			double phase3_M[6]{ 100,100,100,0, 0, 0 };
 
-			double phase4_B[6]{ 1000,1500,1500,50,50,50 };
-			double phase4_M[6]{ 10,10,10,10,10,10 };
+			double phase4_B[6]{ 3000,3300,3300,4.5,4.5,4.5 };
+			double phase4_M[6]{ 150,100,100,2.5,2.5,2.5 };
 
-			double phase5_B[6]{ 100,100,100,10,10,10 };
-			double phase5_M[6]{ 1,1,1,10,10,10 };
+			double phase5_B[6]{ 2000,3500,3500,450,450,450 };
+			double phase5_M[6]{ 100,200,200,200, 200, 200 };
 
+			double phase6_B[6]{ 0,5000,5000,0,0,0 };
+			double phase6_M[6]{ 0,100,100,0, 0, 0 };
 
 			//Counter
 			int contact_count = 0;
 			int current_count = 0;
+
+			//Allign Counter
 			int allign_count = 0;
-			int success_count = 0;
+			int allign_success_count = 0;
+
+
+			//Pos Counter
+			int pos_count = 0;
+			int pos_success_count = 0;
+
+			double current_pos_checkek[6] = { 0 };
 
 			//Test
 			//double actual_force[6]{ 0 };
@@ -489,7 +508,7 @@ namespace robot
 			int m_;
 
 			//Force Buffer
-			std::array<double, 10> force_buffer[6] = {};
+			std::array<double, 20> force_buffer[6] = {};
 			int buffer_index[6]{ 0 };
 		};
 
@@ -522,6 +541,116 @@ namespace robot
 			double arm2_init_force[6]{ 0 };
 			double arm2_p_vector[6]{ 0 };
 			double arm2_l_vector[6]{ 0 };
+
+		};
+
+	};
+
+
+	class HoleInPeg :public aris::core::CloneObject<HoleInPeg, aris::plan::Plan>
+	{
+	public:
+		auto virtual prepareNrt()->void;
+		auto virtual executeRT()->int;
+
+		virtual ~HoleInPeg();
+		explicit HoleInPeg(const std::string& name = "HoleInPeg");
+
+	private:
+		struct Imp;
+		aris::core::ImpPtr<Imp> imp_;
+
+		struct HoleInPeg::Imp {
+
+			//Flag
+			//Phase 1 -> Approach, Phase 2 -> Contact, Phase 3 -> Align, Phase 4 -> Fit, Phase 5 -> Insert
+			bool init = false;
+			bool stop = false;
+			bool phase1 = false;
+			bool phase2 = false;
+			bool phase3 = false;
+			bool phase4 = false;
+			bool phase5 = false;
+
+			//Force Compensation Parameter
+			double comp_f[6]{ 0 };
+
+			//Arm1
+			double arm1_init_force[6]{ 0 };
+			double arm1_start_force[6]{ 0 };
+			double arm1_p_vector[6]{ 0 };
+			double arm1_l_vector[6]{ 0 };
+
+			//Arm2
+			double arm2_init_force[6]{ 0 };
+			double arm2_start_force[6]{ 0 };
+			double arm2_p_vector[6]{ 0 };
+			double arm2_l_vector[6]{ 0 };
+
+			//Desired Pos, Vel, Acc, Foc
+			double arm1_x_d[6]{ 0 };
+			double arm2_x_d[6]{ 0 };
+
+			double v_d[6]{ 0 };
+			double a_d[6]{ 0 };
+			double f_d[6]{ 0 };
+
+			//Desired Force of Each Phase
+			double phase2_fd[6]{ 0 };
+			double phase3_fd[6]{ 5,0,0,0,0,0 };
+			double phase4_fd[6]{ -2.0,0,0,0,0,0 };
+			double phase5_fd[6]{ 0 };
+
+			//Desired Pos of Each Phase
+			double phase2_xd[6]{ 0 };
+
+			//Current Vel
+			double v_c[6]{ 0 };
+
+			//Impedence Parameter
+			//double K[6]{ 100,100,100,15,15,15 };
+			double phase3_B[6]{ 25000,1500,1500,3,3,3 };
+			double phase3_M[6]{ 2000,100,100,2,2,2 };
+
+			double phase4_B[6]{ 1000,1500,1500,50,50,50 };
+			double phase4_M[6]{ 10,10,10,10,10,10 };
+
+			double phase5_B[6]{ 100,100,100,10,10,10 };
+			double phase5_M[6]{ 1,1,1,10,10,10 };
+
+
+			//Counter
+			int current_count = 0;
+			int allign_count = 0;
+			int success_count = 0;
+
+
+			int start_count = 0;
+			int complete_count = 0;
+			int back_count = 0;
+
+			//Pos Counter
+			int pos_count = 0;
+			int pos_success_count = 0;
+
+			double current_pos_checkek[6] = { 0 };
+
+			//Test
+			//double actual_force[6]{ 0 };
+
+			//Switch Angle
+			double d_;
+
+			//Switch Point
+			int p_;
+
+			//Arm1 Force Buffer
+			std::array<double, 10> arm1_force_buffer[6] = {};
+			int arm1_buffer_index[6]{ 0 };
+
+			//Arm2 Force Buffer
+			std::array<double, 10> arm2_force_buffer[6] = {};
+			int arm2_buffer_index[6]{ 0 };
 
 		};
 

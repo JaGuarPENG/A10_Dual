@@ -17,7 +17,7 @@ endif(WIN32)
 include_directories(${aris_INCLUDE_DIRS})
 
 
-add_executable(A10 src/main.cpp  src/robot.cpp src/robot.hpp src/plan.cpp src/plan.hpp src/gravcomp.cpp src/gravcomp.hpp)
+add_executable(A10 src/main.cpp  src/robot.cpp src/robot.hpp src/plan.cpp src/plan.hpp src/gravcomp.cpp src/gravcomp.hpp src/force.cpp src/force.hpp)
 
 
 
